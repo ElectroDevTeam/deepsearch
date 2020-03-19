@@ -9,10 +9,21 @@ import { Widget } from "@lumino/widgets";
 import React from "react";
 import ReactDOM from 'react-dom';
 
+import SearchPage from './SearchPage';
+
+declare namespace JSX {
+  interface Element { }
+  interface IntrinsicElements { div: any}
+}
+
 function initSearchWidget(content: Widget) {
   let searchHeader = <div>
-    <h2>Search Everything</h2>
-    <input/>
+    <h2>Search Everything!</h2>
+    <input
+      onChange={(e) => {console.log("New event", e.target)}}
+    />
+    <SearchPage
+    />
   </div>;
   ReactDOM.render(searchHeader, content.node);
 }
