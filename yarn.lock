@@ -48,7 +48,7 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.12.1.tgz#2a98fea9fbb8a606ddc79a4680034e9d5591c550"
   integrity sha512-ZtjIIFplxncqxvogq148C3hBLQE+W3iJ8E4UvJ09zIJUgzwLcROsWwFDErVSXY2Plzao5J9KUYNHKHMEUYDMKw==
 
-"@jupyterlab/application@^2.0.0":
+"@jupyterlab/application@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@jupyterlab/application/-/application-2.0.2.tgz#393965798c4e04f522f9aa6a9b02b883a35a6634"
   integrity sha512-/4KG2jBaUx5s+uuEKpTjJC3kOEQWKmpDNorOLP8PPsdWMl1VlrYJJmnpvIUOLLnJZAycnK7O4z7jBDp6wv4S2Q==
