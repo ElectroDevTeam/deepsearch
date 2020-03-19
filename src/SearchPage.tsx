@@ -12,6 +12,12 @@ const SearchPage: React.SFC<SearchPageProps> = (props) => {
     <input
       onChange={(e) => {setSearchQuery(e.target.value);}}
     />
+    <button 
+        type="button"
+        onClick={() => {alert(`Searching ${searchQuery}`);}}
+    >
+        SEARCH
+    </button>
     <SearchResult
         filename={searchQuery}
     />
