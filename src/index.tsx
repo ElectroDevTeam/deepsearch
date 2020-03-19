@@ -19,9 +19,6 @@ declare namespace JSX {
 function initSearchWidget(content: Widget) {
   let searchHeader = <div>
     <h2>Search Everything!</h2>
-    <input
-      onChange={(e) => {console.log("New event", e.target)}}
-    />
     <SearchPage
     />
   </div>;
