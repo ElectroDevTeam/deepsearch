@@ -1,26 +1,42 @@
 import React, { useState } from "react";
 import SearchResult from "./SearchResult";
+import axios from "axios";
+import {IDocumentManager} from "@jupyterlab/docmanager";
+import { PathExt } from "@jupyterlab/coreutils";
 
-interface SearchPageProps {}
+interface SearchPageProps {
+  docManager: IDocumentManager,
+}
 
-const SearchPage: React.SFC<SearchPageProps> = props => {
+const SearchPage: React.SFC<SearchPageProps> = ({docManager}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchDir, setSearchDir] = useState("/");
   const [hasSearched, setHasSearched] = useState(false);
   const [searchResult, setSearchResult] = useState({
-    totalResults: 2,
-    totalFiles: 1,
+    totalResults: 0,
+    totalFiles: 0,
     results: []
   });
 
+  const openFunction = (filePath: string) => () => {
+    docManager.openOrReveal(PathExt.normalize(filePath.replace('\\/', '\\')));
+  };
+
   const search = () => {
-    //   Do search stuff
-    setHasSearched(true);
+    if (searchQuery !== "") {
+      //   Do search stuff
+      axios
+        .get(`/api/deepsearch?query=${searchQuery}&dir=${searchDir}`)
+        .then(result => {
+          setSearchResult(result.data);
+        });
+      setHasSearched(true);
+    }
   };
 
   return (
     <>
-      <div className="deepsearch-inner-content">
+      <div className="deepsearch-inner-content noselect">
         <input
           className="deepsearch-search-input"
           onChange={e => {
@@ -58,7 +74,11 @@ const SearchPage: React.SFC<SearchPageProps> = props => {
           </div>
         )}
       </div>
-      <SearchResult filename={searchQuery} />
+      <div className="deepsearch-searchresult-collection">
+        {searchResult.results.map(res => (
+          <SearchResult filename={res.filename} results={res.results} openFunc={openFunction(res.filename)}/>
+        ))}
+      </div>
     </>
   );
 };

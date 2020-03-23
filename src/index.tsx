@@ -1,9 +1,12 @@
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  JupyterFrontEndPlugin,
+  ILabShell
 } from "@jupyterlab/application";
 
 import { ICommandPalette, MainAreaWidget } from "@jupyterlab/apputils";
+
+import {IDocumentManager} from "@jupyterlab/docmanager";
 
 import { Widget } from "@lumino/widgets";
 import React from "react";
@@ -16,9 +19,10 @@ declare namespace JSX {
   interface IntrinsicElements { div: any}
 }
 
-function initSearchWidget(content: Widget) {
+function initSearchWidget(content: Widget, docManager: IDocumentManager) {
   let searchHeader = <div>
     <SearchPage
+      docManager={docManager}
     />
   </div>;
   ReactDOM.render(searchHeader, content.node);
@@ -30,16 +34,16 @@ function initSearchWidget(content: Widget) {
 const extension: JupyterFrontEndPlugin<void> = {
   id: "deepsearch",
   autoStart: true,
-  requires: [ICommandPalette],
-  activate: (app: JupyterFrontEnd, palette: ICommandPalette) => {
+  requires: [ICommandPalette, IDocumentManager, ILabShell],
+  activate: (app: JupyterFrontEnd, palette: ICommandPalette, docManager: IDocumentManager, labShell: ILabShell) => {
     console.log("JupyterLab extension deepsearch is activated!");
     console.log("ICommandPalette 123:", palette);
     // Create a blank content widget inside of MainAreaWidget
     const content = new Widget();
     const widget = new MainAreaWidget({ content });
-    initSearchWidget(content);
+    initSearchWidget(content, docManager);
     widget.id = "deepsearch";
-    widget.title.label = "Deepsearch";
+    widget.title.iconClass = "jp-SideBar-tabIcon jp-SearchIcon";
     widget.title.closable = true;
 
     // Add an application commend
@@ -57,6 +61,7 @@ const extension: JupyterFrontEndPlugin<void> = {
     });
     // Add the command to the palette.
     palette.addItem({ command, category: "Search" });
+    labShell.add(widget, "left");
   }
 };
 

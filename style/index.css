@@ -1,27 +1,59 @@
 .deepsearch-label {
-    color: white;
-    font-size: 0.8em;
+  color: white;
+  font-size: 0.8em;
 }
 
 .deepsearch-search-input {
-    width: -webkit-fill-available;
-    display: block;
-    margin-bottom: 0.5em;
-    background-color: #3c3c3c;
-    border: 0;
-    padding: 0.3em;
-    color: white;
+  width: -webkit-fill-available;
+  display: block;
+  margin-bottom: 0.5em;
+  background-color: #3c3c3c;
+  border: 0;
+  padding: 0.3em;
+  color: white;
+}
+
+.deepsearch-searchresult {
+  color: white;
 }
 
 .deepsearch-inner-content {
-    margin: 0.5em;
-    color: white;
+  margin: 0.5em;
+  color: white;
+}
+
+.deepsearch-searchresult-collection {
+  margin: 0.3em;
+}
+
+.deepsearch-searchresult-filename {
+  cursor: pointer;
 }
 
 .deepsearch-results-label {
-    color: #a7a7a7;
+  color: #a7a7a7;
+  font-size: 0.9em;
+}
+
+.deepsearch-searchresult-description {
+    margin-left: 1.5em;
+}
+
+.deepsearch-highlight-hover:hover {
+    background-color: rgb(39, 39, 39);
+    cursor: pointer;
 }
 
 body {
-    background-color: rgb(32, 32, 32);
+  background-color: rgb(32, 32, 32);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Opera and Firefox */
 }
