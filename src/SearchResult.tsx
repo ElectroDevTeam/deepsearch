@@ -6,36 +6,50 @@ interface SearchResultProps {
   openFunc: Function;
 }
 
-const SearchResult: React.SFC<SearchResultProps> = ({ filename, results, openFunc }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+const SearchResult: React.SFC<SearchResultProps> = ({
+  filename,
+  results,
+  openFunc
+}) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div className="deepsearch-searchresult noselect">
       <div
         style={{
-          overflow: 'hidden'
+          overflow: "hidden"
         }}
       >
-        <span
+        <div
           className="deepsearch-searchresult-filename deepsearch-highlight-hover"
-          onClick={() => {setIsCollapsed(!isCollapsed);}}
+          onClick={() => {
+            setIsCollapsed(!isCollapsed);
+          }}
         >
-          {filename.replace(/^.*[\\\/]/, '')}
-        </span>
+          {filename.replace(/^.*[\\\/]/, "")}
+        </div>
       </div>
-      {!isCollapsed && 
-      <div
-        className="deepsearch-searchresult-description noselect"
-      >
-        {results.map(res => (
-          <div
-            className="deepsearch-highlight-hover"
-            onClick={() => {openFunc();}}
-          >
-            {res.linenumber} {res.content}
-          </div>
-        ))}
-      </div>}
+      {!isCollapsed && (
+        <div className="deepsearch-searchresult-description noselect">
+          {results.map(res => (
+            <div
+              className="deepsearch-highlight-hover"
+              onClick={() => {
+                openFunc();
+              }}
+            >
+              <pre style={{ display: "inline", margin: 0 }}>
+                <span
+                  className="deepsearch-lineno"
+                >
+                  {res.linenumber}
+                </span>
+                <span>{res.content}</span>
+              </pre>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
