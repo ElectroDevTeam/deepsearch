@@ -1,3 +1,27 @@
-h2, h1 {
+.deepsearch-label {
     color: white;
+    font-size: 0.8em;
+}
+
+.deepsearch-search-input {
+    width: -webkit-fill-available;
+    display: block;
+    margin-bottom: 0.5em;
+    background-color: #3c3c3c;
+    border: 0;
+    padding: 0.3em;
+    color: white;
+}
+
+.deepsearch-inner-content {
+    margin: 0.5em;
+    color: white;
+}
+
+.deepsearch-results-label {
+    color: #a7a7a7;
+}
+
+body {
+    background-color: rgb(32, 32, 32);
 }

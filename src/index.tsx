@@ -18,7 +18,6 @@ declare namespace JSX {
 
 function initSearchWidget(content: Widget) {
   let searchHeader = <div>
-    <h2>Search Everything!</h2>
     <SearchPage
     />
   </div>;
@@ -50,7 +49,7 @@ const extension: JupyterFrontEndPlugin<void> = {
       execute: () => {
         if (!widget.isAttached) {
           // Attach the widget to the main work area if it's not there
-          app.shell.add(widget, "main");
+          app.shell.add(widget, "left");
         }
         // Activate the widget
         app.shell.activateById(widget.id);
