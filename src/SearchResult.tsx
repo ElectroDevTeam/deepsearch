@@ -1,18 +1,20 @@
 import React, { useState } from "react";
+import Hightlighter from "react-highlight-words";
 
 interface SearchResultProps {
   filename: string;
   results: Array<any>;
   openFunc: Function;
+  query: string;
 }
 
 const SearchResult: React.SFC<SearchResultProps> = ({
   filename,
   results,
-  openFunc
+  openFunc,
+  query
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-
   return (
     <div className="deepsearch-searchresult noselect">
       <div
@@ -26,6 +28,15 @@ const SearchResult: React.SFC<SearchResultProps> = ({
             setIsCollapsed(!isCollapsed);
           }}
         >
+          <span
+            className={isCollapsed ? "chevron right" : "chevron bottom"}
+            style={{
+              margin: "0 0.5em 0 0",
+              display: "inline-block",
+              position: "relative",
+              bottom: "-0.2em"
+            }}
+          ></span>
           {filename.replace(/^.*[\\\/]/, "")}
         </div>
       </div>
@@ -39,12 +50,15 @@ const SearchResult: React.SFC<SearchResultProps> = ({
               }}
             >
               <pre style={{ display: "inline", margin: 0 }}>
-                <span
-                  className="deepsearch-lineno"
-                >
-                  {res.linenumber}
+                <span className="deepsearch-lineno">{res.linenumber}</span>
+                <span>
+                  <Hightlighter
+                    highlightClassName="deepsearch-highlight"
+                    searchWords={[query]}
+                    autoEscape={true}
+                    textToHighlight={res.content}
+                  />
                 </span>
-                <span>{res.content}</span>
               </pre>
             </div>
           ))}

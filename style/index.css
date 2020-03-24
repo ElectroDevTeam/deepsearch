@@ -36,12 +36,15 @@
 }
 
 .deepsearch-searchresult-description {
-    margin-left: 1.5em;
+  margin-left: 1.5em;
+}
+
+.deepsearch-widget {
 }
 
 .deepsearch-highlight-hover:hover {
-    background-color: rgb(39, 39, 39);
-    cursor: pointer;
+  background-color: rgb(39, 39, 39);
+  cursor: pointer;
 }
 
 body {
@@ -62,4 +65,42 @@ body {
   background-color: #494949;
   padding: 0 1em 0 0.5em;
   margin-right: 0.25em;
+}
+
+.deepsearch-scroll-wrap {
+}
+
+.deepsearch-highlight {
+  color: white;
+  background-color: #44310d;
+}
+
+.chevron::before {
+	border-style: solid;
+  border-width: 0.05em 0.05em 0 0;
+  border-color: white;
+	content: '';
+	display: inline-block;
+	height: 0.45em;
+	left: 0.15em;
+	position: relative;
+	top: 0.15em;
+	transform: rotate(-45deg);
+	vertical-align: top;
+	width: 0.45em;
+}
+
+.chevron.right:before {
+	left: 0;
+	transform: rotate(45deg);
+}
+
+.chevron.bottom:before {
+	top: 0;
+	transform: rotate(135deg);
+}
+
+.chevron.left:before {
+	left: 0.25em;
+	transform: rotate(-135deg);
 }

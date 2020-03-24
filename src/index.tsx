@@ -37,7 +37,6 @@ const extension: JupyterFrontEndPlugin<void> = {
   requires: [ICommandPalette, IDocumentManager, ILabShell],
   activate: (app: JupyterFrontEnd, palette: ICommandPalette, docManager: IDocumentManager, labShell: ILabShell) => {
     console.log("JupyterLab extension deepsearch is activated!");
-    console.log("ICommandPalette 123:", palette);
     // Create a blank content widget inside of MainAreaWidget
     const content = new Widget();
     const widget = new MainAreaWidget({ content });

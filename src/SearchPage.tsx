@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import SearchResult from "./SearchResult";
 import axios from "axios";
-import {IDocumentManager} from "@jupyterlab/docmanager";
+import { IDocumentManager } from "@jupyterlab/docmanager";
 import { PathExt } from "@jupyterlab/coreutils";
 
 interface SearchPageProps {
-  docManager: IDocumentManager,
+  docManager: IDocumentManager;
 }
 
-const SearchPage: React.SFC<SearchPageProps> = ({docManager}) => {
+const SearchPage: React.SFC<SearchPageProps> = ({ docManager }) => {
+  const [oldQuery, setOldQuery] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchDir, setSearchDir] = useState("/");
   const [hasSearched, setHasSearched] = useState(false);
@@ -19,7 +20,14 @@ const SearchPage: React.SFC<SearchPageProps> = ({docManager}) => {
   });
 
   const openFunction = (filePath: string) => () => {
-    docManager.openOrReveal(PathExt.normalize(filePath.replace('\\/', '\\')));
+    docManager.openOrReveal(
+      PathExt.normalize(
+        filePath
+          .replace("\\/", "\\")
+          .replace("\\\\", "\\")
+          .replace("\\", "/")
+      )
+    );
   };
 
   const search = () => {
@@ -29,13 +37,14 @@ const SearchPage: React.SFC<SearchPageProps> = ({docManager}) => {
         .get(`/api/deepsearch?query=${searchQuery}&dir=${searchDir}`)
         .then(result => {
           setSearchResult(result.data);
+          setOldQuery(searchQuery);
+          setHasSearched(true);
         });
-      setHasSearched(true);
     }
   };
 
   return (
-    <>
+    <div className="deepsearch-widget">
       <div className="deepsearch-inner-content noselect">
         <input
           className="deepsearch-search-input"
@@ -74,12 +83,21 @@ const SearchPage: React.SFC<SearchPageProps> = ({docManager}) => {
           </div>
         )}
       </div>
-      <div className="deepsearch-searchresult-collection">
-        {searchResult.results.map(res => (
-          <SearchResult filename={res.filename} results={res.results} openFunc={openFunction(res.filename)}/>
-        ))}
+      <div id="deepsearch-content">
+        <div className="deepsearch-scroll-wrap">
+          <div className="deepsearch-searchresult-collection">
+            {searchResult.results.map(res => (
+              <SearchResult
+                filename={res.filename}
+                results={res.results}
+                openFunc={openFunction(res.filename)}
+                query={oldQuery}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
