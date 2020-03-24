@@ -47,7 +47,6 @@ const extension: JupyterFrontEndPlugin<void> = {
     initSearchWidget(content, docManager);
     widget.id = "deepsearch";
     widget.title.iconClass = "jp-SideBar-tabIcon jp-SearchIcon";
-    widget.title.closable = true;
 
     // Add an application commend
     const command: string = "deepsearch:search";
