@@ -83,19 +83,15 @@ const SearchPage: React.SFC<SearchPageProps> = ({ docManager }) => {
           </div>
         )}
       </div>
-      <div id="deepsearch-content">
-        <div className="deepsearch-scroll-wrap">
-          <div className="deepsearch-searchresult-collection">
-            {searchResult.results.map(res => (
-              <SearchResult
-                filename={res.filename}
-                results={res.results}
-                openFunc={openFunction(res.filename)}
-                query={oldQuery}
-              />
-            ))}
-          </div>
-        </div>
+      <div className="deepsearch-searchresult-collection">
+        {searchResult.results.map(res => (
+          <SearchResult
+            filename={res.filename}
+            results={res.results}
+            openFunc={openFunction(res.filename)}
+            query={oldQuery}
+          />
+        ))}
       </div>
     </div>
   );

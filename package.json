@@ -1,7 +1,7 @@
 {
   "name": "deepsearch",
   "version": "0.1.0",
-  "description": "Search on entire directories, symbols and notebooks",
+  "description": "Search on entire directories.",
   "keywords": [
     "jupyter",
     "jupyterlab",

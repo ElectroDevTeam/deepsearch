@@ -20,7 +20,11 @@ declare namespace JSX {
 }
 
 function initSearchWidget(content: Widget, docManager: IDocumentManager) {
-  let searchHeader = <div>
+  let searchHeader = <div
+    style={{
+      height: '100%'
+    }}
+  >
     <SearchPage
       docManager={docManager}
     />
